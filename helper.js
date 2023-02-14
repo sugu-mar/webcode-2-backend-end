@@ -20,22 +20,31 @@ export async function EditData(id, updatedata) {
     .updateOne({ id: id }, { $set: updatedata })
 }
 
-// export async function genPassword(password) {
+// This function generates password
 export async function genPassword(password) {
   const salt = await bcrypt.genSalt(10)
-  console.log(salt)
+  // console.log(salt)
   const hashedPassword = await bcrypt.hash(password, salt)
-  console.log(hashedPassword)
+  // console.log(hashedPassword)
   return hashedPassword
 }
-// }
-export async function createUser(username, hashedPassword) {
-  return await client
-    .db('crmdata')
-    .collection('users')
-    .insertOne({ username: username, password: hashedPassword })
+
+// This function stores user data into server
+export async function createUser(
+  username,
+  firstName,
+  lastName,
+  hashedPassword,
+) {
+  return await client.db('crmdata').collection('users').insertOne({
+    username: username,
+    firstName: firstName,
+    lastName: lastName,
+    password: hashedPassword,
+  })
 }
 
+// checks whether userName already exists in server
 export async function getUserByName(username) {
   return await client
     .db('crmdata')
@@ -44,4 +53,3 @@ export async function getUserByName(username) {
 }
 
 console.log(genPassword('password@123'))
-// }

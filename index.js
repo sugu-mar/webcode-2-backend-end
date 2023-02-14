@@ -56,8 +56,8 @@ async function genPassword(password) {
   const salt = await bcrypt.genSalt(10)
   console.log(salt)
   const hashedPassword = await bcrypt.hash(password, salt)
-  console.log(hashedPassword)
+  //console.log(hashedPassword)
 }
 
-
-console.log(genPassword('password@123'))
+//console.log(genPassword('password@123'))
+//promise pending

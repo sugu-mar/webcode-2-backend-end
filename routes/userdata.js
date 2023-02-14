@@ -45,7 +45,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const { id } = req.params
   const updatedata = req.body
-  console.log(updatedata)
+  // console.log(updatedata)
   const result = await EditData(id, updatedata)
   res.send(result)
 })
