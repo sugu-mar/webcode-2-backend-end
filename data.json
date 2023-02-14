@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "email": "johndoe@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "password": "johndoe123",
+    "type": "admin"
+  },
+  {
+    "id": 2,
+    "email": "janedoe@example.com",
+    "firstName": "Jane",
+    "lastName": "Doe",
+    "password": "janedoe456",
+    "type": "manager"
+  },
+  {
+    "id": 3,
+    "email": "bobsmith@example.com",
+    "firstName": "Bob",
+    "lastName": "Smith",
+    "password": "bobsmith789",
+    "type": "employee"
+  },
+  {
+    "id": 4,
+    "email": "emmamiller@example.com",
+    "firstName": "Emma",
+    "lastName": "Miller",
+    "password": "emmamiller101",
+    "type": "manager"
+  },
+  {
+    "id": 5,
+    "email": "michaeljones@example.com",
+    "firstName": "Michael",
+    "lastName": "Jones",
+    "password": "michaeljones202",
+    "type": "employee"
+  },
+  {
+    "id": 6,
+    "email": "sarahjohnson@example.com",
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "password": "sarahjohnson303",
+    "type": "employee"
+  },
+  {
+    "id": 7,
+    "email": "davidsmith@example.com",
+    "firstName": "David",
+    "lastName": "Smith",
+    "password": "davidsmith404",
+    "type": "admin"
+  },
+  {
+    "id": 8,
+    "email": "katiebrown@example.com",
+    "firstName": "Katie",
+    "lastName": "Brown",
+    "password": "katiebrown505",
+    "type": "employee"
+  },
+  {
+    "id": 9,
+    "email": "thomasmiller@example.com",
+    "firstName": "Thomas",
+    "lastName": "Miller",
+    "password": "thomasmiller606",
+    "type": "admin"
+  },
+  {
+    "id": 10,
+    "email": "jenniferjohnson@example.com",
+    "firstName": "Jennifer",
+    "lastName": "Johnson",
+    "password": "jenniferjohnson707",
+    "type": "employee"
+  },
+  {
+    "id": 11,
+    "email": "jamesdavis@example.com",
+    "firstName": "James",
+    "lastName": "Davis",
+    "password": "jamesdavis808",
+    "type": "manager"
+  },
+  {
+    "id": 12,
+    "email": "oliviamiller@example.com",
+    "firstName": "Olivia",
+    "lastName": "Miller",
+    "password": "oliviamiller909",
+    "type": "employee"
+  }
+]
