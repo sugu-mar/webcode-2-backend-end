@@ -1,10 +1,19 @@
 import express from 'express'
-import { MongoClient } from 'mongodb'
-const app = express()
-
 import * as dotenv from 'dotenv'
+import { MongoClient } from 'mongodb'
+import { userdataRouter } from './routes/userdata.js'
+import bcrypt from 'bcrypt'
+import { usersRouter } from './routes/user.js'
+// import {
+//   getAllData,
+//   getDataById,
+//   AddData,
+//   DeleteDataById,
+//   EditData,
+// } from './helper.js'
 
 dotenv.config()
+const app = express()
 const PORT = process.env.PORT
 const MONGO_URL = process.env.MONGO_URL
 
@@ -15,7 +24,7 @@ async function createConnection() {
   return client
 }
 
-const client = await createConnection()
+export const client = await createConnection()
 
 app.use(express.json())
 
@@ -23,7 +32,6 @@ app.get('/', (req, res) => {
   res.send('Hello world')
 })
 
-//get all user data
 // app.get('/userdata', (req, res) => {
 //   res.send(data)
 // })
@@ -38,62 +46,18 @@ app.get('/', (req, res) => {
 // })
 
 //get all userdata
+app.use('/userdata', userdataRouter)
 
-app.get('/userdata', async (req, res) => {
-  const data = await client
-    .db('crmdata')
-    .collection('userdata')
-    .find({})
-    .toArray()
-  data ? res.send(data) : res.status(404).send({ message: 'No userdata found' })
-})
-
-//get particular userdata by using id
-
-app.get('/userdata/:id', async (req, res) => {
-  const { id } = req.params
-  const data = await client
-    .db('crmdata')
-    .collection('userdata')
-    .findOne({ id: id })
-  data ? res.send(data) : res.status(404).send({ message: 'No userdata found' })
-})
-
-app.post('/userdata', async (req, res) => {
-  const newData = req.body
-  const result = await client
-    .db('crmdata')
-    .collection('userdata')
-    .insertMany(newData)
-  result
-    ? res.send(result)
-    : res.status(404).send({ message: 'No userdata added' })
-})
-
-//delete particular user data
-app.delete('/userdata/:id', async (req, res) => {
-  const { id } = req.params
-  const data = await client
-    .db('crmdata')
-    .collection('userdata')
-    .deleteOne({ id: id })
-  console.log(data)
-  data
-    ? res.send(data)
-    : res.status(404).send({ message: 'No userdata found ' })
-})
-
-//update userdata
-
-app.put('/userdata/:id', async (req, res) => {
-  const { id } = req.params;
-  const updatedata = req.body;
-  console.log(updatedata);
-  const result = await client
-    .db('crmdata')
-    .collection('userdata')
-    .updateOne({id:id}, { $set: updatedata });
-  res.send(result);
-})
+app.use('/user', usersRouter)
 
 app.listen(PORT, () => console.log('server started on port', PORT))
+
+async function genPassword(password) {
+  const salt = await bcrypt.genSalt(10)
+  console.log(salt)
+  const hashedPassword = await bcrypt.hash(password, salt)
+  console.log(hashedPassword)
+}
+
+
+console.log(genPassword('password@123'))
