@@ -1,7 +1,16 @@
 import express from 'express'
+import { auth } from '../middleware/auth.js'
 import { genPassword, createUser, getUserByName } from '../helper.js'
 const router = express.Router()
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import { getUserData } from '../helper.js'
+
+router.get('/', async (req, res) => {
+  const data = await getUserData()
+  res.send(data)
+  // : res.status(404).send({ message: 'No user data found in server' })
+})
 
 // it will watch whether user provides necessary data for signup
 router.post('/signup', async (req, res) => {
@@ -51,13 +60,21 @@ router.post('/login', async (req, res) => {
   const storedDbPassword = userFromDB.password
 
   const isPasswordMatch = await bcrypt.compare(password, storedDbPassword)
-if(!isPasswordMatch){res.status(400).send({message:"Invalid Credentials"})
-return;
-}
-res.send(isPasswordMatch)
+  if (!isPasswordMatch) {
+    res.status(400).send({ message: 'Invalid Credentials' })
+    return
+  }
+
+  //token
+
+  const token = jwt.sign({ id: userFromDB._id }, process.env.SECRET_KEY)
+  res.cookie('jwt', token, { httpOnly: true })
+  res.send({ message: 'Sucessful login', token: token })
+
+  // res.send(isPasswordMatch)
 
   // res.send(result)
-});
+})
 
 export const usersRouter = router
 

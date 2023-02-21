@@ -4,6 +4,9 @@ import bcrypt from 'bcrypt'
 export async function getAllData() {
   return await client.db('crmdata').collection('userdata').find({}).toArray()
 }
+export async function getUserData() {
+  return await client.db('crmdata').collection('users').find({}).toArray()
+}
 export async function getDataById(id) {
   return await client.db('crmdata').collection('userdata').findOne({ id: id })
 }

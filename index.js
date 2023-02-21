@@ -4,6 +4,8 @@ import { MongoClient } from 'mongodb'
 import { userdataRouter } from './routes/userdata.js'
 import bcrypt from 'bcrypt'
 import { usersRouter } from './routes/user.js'
+import { auth } from './middleware/auth.js'
+
 // import {
 //   getAllData,
 //   getDataById,
@@ -28,7 +30,7 @@ export const client = await createConnection()
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get('/', auth, (req, res) => {
   res.send('Hello world')
 })
 

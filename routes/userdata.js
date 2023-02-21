@@ -1,4 +1,5 @@
 import express from 'express'
+import { auth } from '../middleware/auth.js'
 import {
   getAllData,
   getDataById,
@@ -9,7 +10,7 @@ import {
 
 const router = express.Router()
 
-router.get('/', async (req, res) => {
+router.get('/', auth,async (req, res) => {
   const data = await getAllData()
   data ? res.send(data) : res.status(404).send({ message: 'No userdata found' })
 })
@@ -21,7 +22,7 @@ router.get('/:id', async (req, res) => {
   data ? res.send(data) : res.status(404).send({ message: 'No userdata found' })
 })
 
-//add user data 
+//add user data
 router.post('/', async (req, res) => {
   const newData = req.body
   const result = await AddData(newData)
@@ -39,7 +40,6 @@ router.delete('/:id', async (req, res) => {
     ? res.send(data)
     : res.status(404).send({ message: 'No userdata found ' })
 })
-
 
 // edit data by id
 router.put('/:id', async (req, res) => {
